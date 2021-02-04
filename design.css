@@ -1,0 +1,39 @@
+body {
+    background-color: rgb(116, 146, 158);
+}
+
+h1
+{
+    color:rgb(27, 37, 175);
+}
+
+.container {
+    display: flex;
+}
+
+ .valider {background-image: linear-gradient(to right, #559dca 0%, #3bade2  51%, #7abbe4  100%)}
+ .valider {
+    display: flex;
+    flex-direction: row-reverse;
+    position: relative;
+    float: right;
+    left: 0;
+    bottom: 0;
+    margin: 10px;
+    padding: 15px 45px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;            
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    display: block;
+  }
+
+  .valider:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+  }
+ 
