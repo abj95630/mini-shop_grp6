@@ -2,31 +2,35 @@
     session_start();
     require_once "connexion_db.php"; 
 
+    error_reporting(E_ALL);
+    ini_set('display_errors', TRUE);
+    ini_set('display_startup_errors', TRUE);
+
     if(isset($_SESSION["id"])) {
         header('Location: index.php');
         exit;
     }
-    $valid = true;
+
     if(!empty($_POST)) {
+        $valid = true;
         // On se place sur le bon formulaire grâce au "name" de la balise "input"
         if(isset($_POST['inscription'])) {
-            $nom  = htmlentities(trim($_POST['nom'])); // On récupère le nom
-            $prenom = htmlentities(trim($_POST['prenom'])); // on récupère le prénom
-            $mail = htmlentities(strtolower(trim($_POST['mail']))); // On récupère le mail
+            $prenom = $_POST['prenom']; // on récupère le prénom
+            $mail = strtolower(trim($_POST['mail'])); // On récupère le mail
             $mdp = trim($_POST['mdp']); // On récupère le mot de passe 
             $confmdp = trim($_POST['confmdp']); //  On récupère la confirmation du mot de passe
  
             //  Vérification du nom
-            if (empty($nom)) {
+            if (empty($_POST['nom'])) {
                 $valid = false;
                 $er_nom = "Le nom d' utilisateur ne peut pas être vide";
-            }      
+            }     
  
             //  Vérification du prénom
             if(empty($prenom)){
                 $valid = false;
                 $er_prenom = "Le prenom d' utilisateur ne peut pas être vide";
-            }      
+            }     
             
             // Vérification du mail
             if(empty($mail)) {
@@ -45,24 +49,28 @@
             } else if($mdp != $confmdp){
                 $valid = false;
                 $er_mdp = "La confirmation du mot de passe ne correspond pas";
-            }
+            } 
  
             // Si toutes les conditions sont remplies alors on fait le traitement
-            if($valid == true) {
-                $mdp = crypt($mdp, "$6$rounds=5000$macleapersonnaliseretagardersecret$");
-                $date_creation = date('Y-m-d H:i:s');
- 
+            if($valid) {
+                $mdp = hash("md5", $mdp);
+                $date_creation = date('Y-m-d');
                 // On insert nos données dans la table utilisateur
                 try {
-                    $sql = "INSERT INTO Utilisateur (nom, prenom, mail, mdp, date_creation) VALUES ($nom, $prenom, $mail, $mdp, $date_creation)";
-                    $bdd->exec($sql);
+                    $query = $bdd->prepare("INSERT INTO Utilisateur (nom, prenom, mail, mdp, date_creation) VALUES (:nom, :prenom, :mail, :mdp, :date_creation)");
+                    $query->bindValue(':nom', $_POST['nom']);
+                    $query->bindValue(':prenom', $prenom);
+                    $query->bindValue(':mail', $mail);
+                    $query->bindValue(':mdp', $mdp);
+                    $query->bindValue(':date_creation', $date_creation);
+                    $query->execute();
                     header('Location: index.php');
                     exit;
                 } catch (Exception $e) {
                     echo $e->getMessage();
                 }
             } 
-        }
+        } 
     } 
 ?>
 
@@ -76,7 +84,7 @@
     </head>
     <body>      
     <div>Inscription</div>
-    <form action="" method="POST">
+    <form actionb="" method="post">
            <?php
             if (isset($er_nom)) {
             ?>
@@ -84,7 +92,7 @@
             <?php    
             }
             ?>
-           <input type="text" placeholder="Votre nom" name="nom" value="<?php if(isset($nom)){ echo $nom; }?>" required>    
+           <input type="text" placeholder="Votre nom" name="nom">    
            <?php
             if (isset($er_prenom)){
             ?>
@@ -92,7 +100,7 @@
             <?php    
             }
            ?>
-           <input type="text" placeholder="Votre prénom" name="prenom" value="<?php if(isset($prenom)){ echo $prenom; }?>" required>    
+           <input type="text" placeholder="Votre prénom" name="prenom">    
            <?php
             if (isset($er_mail)){
             ?>
@@ -100,7 +108,7 @@
             <?php    
             }
            ?>
-           <input type="email" placeholder="Adresse mail" name="mail" value="<?php if(isset($mail)){ echo $mail; }?>" required>
+           <input type="email" placeholder="Adresse mail" name="mail">
            <?php
             if (isset($er_mdp)){
             ?>
@@ -108,8 +116,8 @@
             <?php    
             }
            ?>
-           <input type="password" placeholder="Mot de passe" name="mdp" value="<?php if(isset($mdp)){ echo $mdp; }?>" required>
-           <input type="password" placeholder="Confirmer le mot de passe" name="confmdp" required>
+           <input type="password" placeholder="Mot de passe" name="mdp">
+           <input type="password" placeholder="Confirmer le mot de passe" name="confmdp">
            <button type="submit" name="inscription">Envoyer</button>
     </form>
     </body>
