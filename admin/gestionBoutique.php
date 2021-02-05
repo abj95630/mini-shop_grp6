@@ -200,7 +200,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'affichageProduit'){
 
         echo "<td><a href='?action=modification&id_produit=$produit[id_produit]' class='text-info'><i class='fas fa-edit'></i></a></td>";
         // Bouton pour modifier et on passe dans l'URL action=modification et l'id du produit selectionné
-        echo "<td><a href='?action=suppression&id_produit=$produit[id_produit]' class='text-danger'><i class='fas fa-trash-alt' onclick='return(confirm(\" En êtes vous certain ? \"));'></i></a></td>";
+        echo "<td><a href='?action=suppression&id_produit=$produit[id_produit]' class='text-danger'><i class='fas fa-trash-alt' onclick='return(confirm(\" Ëtes-vous certain de vouloir le supprimer? \"));'></i></a></td>";
         // Bouton pour supprimer et on passe dans l'URL action=modification et l'id du produit selectionné
         echo '</tr>';
     }
@@ -228,7 +228,7 @@ echo '<table class="table table-bordered text-center mb-3"><tr>';
             echo "<td>$value</td>";                
         }
         echo "<td><a href='?action=modification&id_produit=$categorie[id_categorie]' class='text-info'><i class='fas fa-edit'></i></a></td>"; 
-        echo "<td><a href='?action=suppression&id_produit=$categorie[id_categorie]' class='text-danger'><i class='fas fa-trash-alt' onclick='return(confirm(\" En êtes vous certain ? \"));'></i></a></td>";
+        echo "<td><a href='?action=suppression&id_produit=$categorie[id_categorie]' class='text-danger'><i class='fas fa-trash-alt' onclick='return(confirm(\" Ëtes-vous certain de vouloir le supprimer? \"));'></i></a></td>";
         echo '</tr>';
     }
 }
