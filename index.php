@@ -1,32 +1,54 @@
 <?php
+session_start();
 require_once('connexiondb.php');
-
 
 
 if(isset($_POST['deconnexion'])) {
     session_unset();
     session_destroy();
+    header("Location:index.php");
+    exit;
+} else if (isset($_POST['connexion'])) {
     header("Location:connexion.php");
     exit;
+} else if (isset($_POST['inscription'])) {
+    header("Location:inscription.php");
 }
+
 require_once('include/header.php');
 require_once('include/navBar.php');
 echo "Bonjour, bienvenue dans la boutique e-commerce X-GAMING";
 ?>
 
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <link rel="stylesheet" href="index.css">
+        <title>Acceuil</title>
+    </head>
     <body>
-        <form method="post" actionb="">
-            <button type="submit" name="deconnexion">Déconnexion</button>
-        </form>
+        <div class="bouton_connexion-deconnexion">
+            <?php  if(isset($_SESSION['mail']))  { ?>
+                <form method="post" actionb="">
+                    <button type="submit" name="deconnexion">Déconnexion</button>
+                </form> 
+            <?php } else {?>
+                <form method="post" actionb="">
+                    <button type="submit" name="inscription">Inscription</button>
+                    <button type="submit" name="connexion">Connexion</button>
+                </form>
+            <?php } ?>
+        </div>
 
 
 <div class="col-lg-9">
     <div class="row">
 
         <?php 
-
         $data = $bdd->prepare("SELECT * FROM produit");
-
         $data->execute();
         ?>
 
@@ -47,9 +69,9 @@ echo "Bonjour, bienvenue dans la boutique e-commerce X-GAMING";
             </div>
         </div>
     
-    <?php endwhile; ?>
+        <?php endwhile; ?>
     </div>
-    </div>
-    <?php 
+</div>
+<?php 
     require_once('include/footer.php');
-    ?>
+?>

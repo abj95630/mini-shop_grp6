@@ -6,12 +6,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="/mini-shop_grp6/connexion.php">Connexion</a>
-        </li>
-        <li class="nav-item">
+        <!--<li class="nav-item">
           <a class="nav-link" href="/mini-shop_grp6/inscription.php">Inscription</a>
-        </li>
+        </li>-->
         <li class="nav-item">
           <a class="nav-link" href="/mini-shop_grp6/admin/gestionBoutique.php">Gestion Boutique</a>
         </li>

@@ -1,0 +1,6 @@
+.bouton_connexion-deconnexion {
+    display: flex;
+    align-self: right;
+    justify-content: right;
+    flex-direction: row-reverse;
+}

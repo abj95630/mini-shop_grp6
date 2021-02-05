@@ -1,0 +1,22 @@
+form, .nom-connexion {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10%;
+     
+}
+
+.nom-connexion {
+    font-size: x-large;
+}
+
+body {
+    background-color: darkcyan;
+}
+
+input {
+    margin: 2%;
+    border-style:inset;
+}
+

@@ -1,0 +1,22 @@
+form, .nom-inscription {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin: 4%;
+}
+
+.nom-inscription {
+    font-size: 2em;
+    font-family: Gill Sans Extrabold, sans-serif;
+}
+
+body {
+    background-color: darkcyan;
+}
+
+input {
+    border-style:inset;
+    border-width: 2px;
+    margin: 2%;
+}

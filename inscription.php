@@ -1,12 +1,13 @@
 <?php
+    session_start();
     require_once('connexiondb.php');
-    //require_once "connexion_db.php"; 
+
 
     error_reporting(E_ALL);
     ini_set('display_errors', TRUE);
     ini_set('display_startup_errors', TRUE);
 
-    if(isset($_SESSION["id"])) {
+    if(isset($_SESSION["mail"])) {
         header('Location: index.php');
         exit;
     }
@@ -40,7 +41,16 @@
             } else if(!preg_match("/^[a-z0-9\-_.]+@[a-z]+\.[a-z]{2,3}$/i", $mail)) {
                 $valid = true;
                 $er_mail = "Le mail invalide";
-            } 
+            } else {
+                $req = $bdd->prepare("SELECT * FROM Utilisateur WHERE mail=?");
+                $req->execute([$mail]);
+                $utilsateur = $req->fetch();
+
+                if($utilsateur) {
+                    echo "Le mail existe déja";
+                    $valid = false;
+                }
+            }
 
             // Vérification du mot de passe
             if(empty($mdp)) {
@@ -64,6 +74,7 @@
                     $query->bindValue(':mdp', $mdp);
                     $query->bindValue(':date_creation', $date_creation);
                     $query->execute();
+                    $_SESSION['mail'] = $mail;
                     header('Location: index.php');
                     exit;
                 } catch (Exception $e) {
@@ -78,6 +89,21 @@
     <body>      
     <div>Inscription</div>
     <form actionb="" method="post">
+
+
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"> 
+        <link href="inscription.css" rel="stylesheet">
+        <title>Inscription</title>
+    </head>
+    <body>      
+        <div class="nom-inscription">Inscription</div>
+        <form actionb="" method="post">
            <?php
             if (isset($er_nom)) {
             ?>
@@ -116,3 +142,6 @@
     <?php 
     require_once('include/footer.php');
     ?>
+        </form>
+    </body>
+</html>
