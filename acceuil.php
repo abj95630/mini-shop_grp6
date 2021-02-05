@@ -17,7 +17,7 @@ require_once('include/header.php');
 require_once('include/navBar.php');
 
 if(isset($_SESSION['mail'])) {
-    echo "Bonjour, bienvenue ". $_SESSION['mail'] ." dans la boutique e-commerce X-GAMING";
+    echo "Bonjour ". $_SESSION['mail'] .", bienvenue dans la boutique e-commerce X-GAMING";
 } else {
     echo "Bonjour bienvenue dans la boutque e-commerce X-GAMING";
 }
