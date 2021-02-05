@@ -1,6 +1,8 @@
 <?php 
 require_once('../connexiondb.php');
 
+
+
 $erreur = false;
 $erreurCategorie = false;
 
@@ -130,6 +132,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'suppression')
     $validDelete = "<p class='col-md-5 mx-auto alert alert-success text-center'>Le produit ID <strong>$_GET[id_produit]</strong> a bien été supprimé !</p>";
 }
 require_once('../include/header.php');
+require_once('../include/navBar.php');
 ?>
 
 <ul class="col-md-4 list-group text-center mt-3 mx-auto">

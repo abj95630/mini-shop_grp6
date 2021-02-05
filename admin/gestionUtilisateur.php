@@ -1,6 +1,7 @@
 <?php 
 require_once('../connexiondb.php');
 require_once('../include/header.php');
+require_once('../include/navBar.php');
 
 $requeteUtilisateur = $bdd->query("SELECT id, nom, prenom, mail, date_creation
 FROM Utilisateur");

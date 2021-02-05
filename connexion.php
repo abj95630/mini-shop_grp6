@@ -1,7 +1,5 @@
 <?php
-
-session_start();
-require_once "connexion_db.php";
+require_once('connexiondb.php');
 
 /*if(isset($_SESSION['mail'])) {
     header('Location:index.php');
@@ -43,16 +41,10 @@ if(!empty($_POST)) {
     }
 
 }
-
+require_once('include/header.php');
+require_once('include/navBar.php');
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <meta charset="utf-8">
-    <title>Connexion</title>
-</head>
 <body>
     <div>Se connecter</div>
     <form method="post">
@@ -77,6 +69,6 @@ if(!empty($_POST)) {
         <input type="password" placeholder="Mot de passe" name="mdp" value="<?php if(isset($mdp)){echo $mdp;}?>" required>
          <button type="submit" name="connexion">Se connecter</button>
     </form>
-</body>
-
-</html>
+<?php 
+require_once('include/footer.php');
+?>

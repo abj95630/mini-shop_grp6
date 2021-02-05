@@ -1,6 +1,6 @@
 <?php
-    session_start();
-    require_once "connexion_db.php"; 
+    require_once('connexiondb.php');
+    //require_once "connexion_db.php"; 
 
     error_reporting(E_ALL);
     ini_set('display_errors', TRUE);
@@ -17,16 +17,16 @@
         if(isset($_POST['inscription'])) {
             $prenom = $_POST['prenom']; // on récupère le prénom
             $mail = strtolower(trim($_POST['mail'])); // On récupère le mail
-            $mdp = trim($_POST['mdp']); // On récupère le mot de passe 
-            $confmdp = trim($_POST['confmdp']); //  On récupère la confirmation du mot de passe
+            $mdp = trim($_POST['mdp']); // On récupère le mot de passe 
+            $confmdp = trim($_POST['confmdp']); //  On récupère la confirmation du mot de passe
  
-            //  Vérification du nom
+            //  Vérification du nom
             if (empty($_POST['nom'])) {
                 $valid = false;
                 $er_nom = "Le nom d' utilisateur ne peut pas être vide";
             }     
  
-            //  Vérification du prénom
+            //  Vérification du prénom
             if(empty($prenom)){
                 $valid = false;
                 $er_prenom = "Le prenom d' utilisateur ne peut pas être vide";
@@ -71,18 +71,11 @@
                 }
             } 
         } 
-    } 
+    }
+    require_once('include/header.php');
+    require_once('include/navBar.php');
 ?>
-
-
-<!DOCTYPE html>
-<html lang="fr">
-    <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Inscription</title>
-    </head>
-    <body>      
+    <body>      
     <div>Inscription</div>
     <form actionb="" method="post">
            <?php
@@ -120,5 +113,6 @@
            <input type="password" placeholder="Confirmer le mot de passe" name="confmdp">
            <button type="submit" name="inscription">Envoyer</button>
     </form>
-    </body>
-</html>
+    <?php 
+    require_once('include/footer.php');
+    ?>

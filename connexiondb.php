@@ -9,4 +9,5 @@ catch (Exception $e)
     die('Erreur MySQL' . $e->getMessage());
 }
 
+session_start();
 ?>
