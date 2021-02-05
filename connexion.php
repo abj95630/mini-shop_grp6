@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once('connexiondb.php');
 
 if(isset($_SESSION['mail'])) {
