@@ -10,7 +10,7 @@ echo '<table class="table table-bordered text-center mb-3"><tr>';
         $colonne = $requeteUtilisateur->getColumnMeta($i);
         echo "<th>$colonne[name]</th>";
     }
-        //echo '<th>Supp</th>';
+    echo '<th>Supp</th>';
     echo '</tr>';
     while($utilisateur = $requeteUtilisateur->fetch(PDO::FETCH_ASSOC)){
         echo '<tr>';
@@ -18,8 +18,18 @@ echo '<table class="table table-bordered text-center mb-3"><tr>';
             echo "<td>$value</td>";
         }
         echo "</td>";
+    
+        echo "<td><a href='?action=suppressionUtilisateur&id=$utilisateur[id]' class='text-danger'><i class='fas fa-trash-alt' onclick='return(confirm(\" Ëtes-vous certain de vouloir le supprimer? \"));'></i></a></td>";
+        echo '</tr>';
     }
-    //echo "<td><a href='?action=suppression&id_utilisateur=$utilisateur[id]' class='text-danger'><i class='fas fa-trash-alt' onclick='return(confirm(\" En êtes vous certain ? \"));'></i></a></td>";
-    echo '</tr>';
-echo '</table>';
+    echo '</table>';
+
+if(isset($_GET['action']) && $_GET['action'] == 'suppressionUtilisateur')
+{
+    $deleteUtilisateur = $bdd->prepare("DELETE FROM Utilisateur WHERE id = :id");
+    $deleteUtilisateur->bindValue(':id', $_GET['id'], PDO::PARAM_INT);
+    $deleteUtilisateur->execute();
+    header("Location: http://localhost/mini-shop_grp6/admin/gestionUtilisateur.php");
+}
+
 ?>
