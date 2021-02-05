@@ -2,7 +2,7 @@
 require_once('connexiondb.php');
 
 if(isset($_SESSION['mail'])) {
-    header('Location:index.php');
+    header('Location:acceuil.php');
     exit;
 }
 
@@ -43,7 +43,7 @@ if(!empty($_POST)) {
     } 
     if($valid) {
         $_SESSION['mail'] = $mail;
-        header('Location: index.php');
+        header('Location: acceuil.php');
         exit;
     }
 

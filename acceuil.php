@@ -5,7 +5,7 @@ require_once('connexiondb.php');
 if(isset($_POST['deconnexion'])) {
     session_unset();
     session_destroy();
-    header("Location:index.php");
+    header("Location:acceuil.php");
     exit;
 } else if (isset($_POST['connexion'])) {
     header("Location:connexion.php");
@@ -25,7 +25,7 @@ echo "Bonjour, bienvenue dans la boutique e-commerce X-GAMING";
         <meta charset="utf-8">
        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" 
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-        <link rel="stylesheet" href="index.css">
+        <link rel="stylesheet" href="acceuil.css">
         <title>Acceuil</title>
     </head>
     <body>

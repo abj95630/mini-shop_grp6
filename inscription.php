@@ -1,13 +1,13 @@
 <?php
+    // Appelation de la base de données
     require_once('connexiondb.php');
-
-
+    // Fonctions pour afficher les erreurs
     error_reporting(E_ALL);
     ini_set('display_errors', TRUE);
     ini_set('display_startup_errors', TRUE);
-
+    // Si une session est en cours on se redirige vers la page d'acceuil
     if(isset($_SESSION["mail"])) {
-        header('Location: index.php');
+        header('Location: acceuil.php');
         exit;
     }
 
@@ -41,10 +41,13 @@
                 $valid = true;
                 $er_mail = "Le mail invalide";
             } else {
-                $req = $bdd->prepare("SELECT * FROM Utilisateur WHERE mail=?");
-                $req->execute([$mail]);
-                $utilsateur = $req->fetch();
-
+                try {
+                    $req = $bdd->prepare("SELECT * FROM Utilisateur WHERE mail=?");
+                    $req->execute([$mail]);
+                    $utilsateur = $req->fetch();
+                } catch (Exception $e) {
+                    echo "Erreur";
+                } 
                 if($utilsateur) {
                     echo "Le mail existe déja";
                     $valid = false;
@@ -55,7 +58,7 @@
             if(empty($mdp)) {
                 $valid = false;
                 $er_mdp = "Le mot de passe ne peut pas être vide";
-            } else if($mdp != $confmdp){
+            } else if($mdp != $confmdp) {
                 $valid = false;
                 $er_mdp = "La confirmation du mot de passe ne correspond pas";
             } 
@@ -74,7 +77,7 @@
                     $query->bindValue(':date_creation', $date_creation);
                     $query->execute();
                     $_SESSION['mail'] = $mail;
-                    header('Location: index.php');
+                    header('Location: acceuil.php');
                     exit;
                 } catch (Exception $e) {
                     echo $e->getMessage();
