@@ -8,7 +8,8 @@ session_start();
 // } catch (Exception $e) {
 //       die('Erreur'.$e->getMessage());
 // }
-
+require_once('include/header.php');
+require_once('include/navBar.php');
 if(isset($_GET['articles_list']) && !empty($_GET['articles_list'])) {
 
     // Traitement du formulaire
