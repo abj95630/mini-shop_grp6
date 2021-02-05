@@ -1,4 +1,4 @@
-    <footer class="fixed-bottom bg-dark p-3 text-center text-white">
+    <footer class="bg-dark p-3 text-center text-white">
         &copy; 2021 - Groupe6 
     </footer>
 
