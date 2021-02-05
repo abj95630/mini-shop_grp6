@@ -41,9 +41,6 @@ echo "Bonjour, bienvenue dans la boutique e-commerce X-GAMING";
                 </form>
             <?php } ?>
         </div>
-        
-        <!-- Lien pour accèder à la boutique -->
-        <a href="panierMinishop.php">Boutique</a>
 
 <div class="col-lg-9">
     <div class="row">

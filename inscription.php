@@ -82,6 +82,7 @@
             } 
         } 
     }
+    // On appel les fichiers pour l'en-tête et le bas de page
     require_once('include/header.php');
     require_once('include/navBar.php');
 ?>
