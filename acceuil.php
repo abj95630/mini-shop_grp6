@@ -1,7 +1,6 @@
 <?php
 require_once('connexiondb.php');
 
-
 if(isset($_POST['deconnexion'])) {
     session_unset();
     session_destroy();
@@ -16,7 +15,13 @@ if(isset($_POST['deconnexion'])) {
 
 require_once('include/header.php');
 require_once('include/navBar.php');
-echo "Bonjour, bienvenue dans la boutique e-commerce X-GAMING";
+
+if(isset($_SESSION['mail'])) {
+    echo "Bonjour, bienvenue ". $_SESSION['mail'] ." dans la boutique e-commerce X-GAMING";
+} else {
+    echo "Bonjour bienvenue dans la boutque e-commerce X-GAMING";
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -46,8 +51,12 @@ echo "Bonjour, bienvenue dans la boutique e-commerce X-GAMING";
     <div class="row">
 
         <?php 
+        try {
         $data = $bdd->prepare("SELECT * FROM produit");
         $data->execute();
+        } catch (Exception$e) {
+            echo $e->getMessage();
+        }
         ?>
 
         <?php while($produit = $data->fetch(PDO::FETCH_ASSOC)): ?>
